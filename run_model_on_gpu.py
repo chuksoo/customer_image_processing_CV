@@ -68,7 +68,7 @@ def create_model(input_shape):
     It defines the model
     """
     backbone = ResNet50(
-        input_shape=(150, 150, 3), weights='imagenet', include_top=False
+        input_shape=input_shape, weights='imagenet', include_top=False
     )
 
     # define the model
@@ -77,14 +77,14 @@ def create_model(input_shape):
     # add layers to model
     model.add(backbone)
     model.add(GlobalAveragePooling2D())
-    model.add(Dense(150, activation='relu'))
-    model.add(Dense(85, activation='relu'))
-    model.add(Dense(12, activation='relu'))
+    model.add(Dense(350, activation='relu'))
+    model.add(Dense(185, activation='relu'))
+    model.add(Dense(1, activation='relu'))
     
     # add compiler
-    optimizer = Adam(lr=0.001)
+    optimizer = Adam(lr=0.0001)
     model.compile(optimizer=optimizer,
-                  loss='mean_squared_error', metrics=['mean_absolute_error']
+                  loss='mse', metrics=['mae']
                   )
 
     return model
