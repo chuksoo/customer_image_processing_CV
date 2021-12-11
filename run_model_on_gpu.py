@@ -14,6 +14,7 @@ def load_train(path):
     """
     It loads the train part of dataset from path
     """
+    labels = pd.read_csv('/datasets/faces/labels.csv')
     # data generator
     train_datagen = ImageDataGenerator(
         validation_split=0.25,
@@ -43,6 +44,7 @@ def load_test(path):
     """
     It loads the validation/test part of dataset from path
     """
+    labels = pd.read_csv('/datasets/faces/labels.csv')
     # validation data generator
     test_datagen = ImageDataGenerator(validation_split=0.25, rescale=1/255)
 
@@ -105,7 +107,6 @@ def train_model(
         validation_data=test_data,
         epochs=10,
         verbose=2,
-        #steps_per_epoch=7,
         batch_size=batch_size,
         steps_per_epoch=steps_per_epoch,
         validation_steps=validation_steps,
